@@ -1,0 +1,21 @@
+version: "3"
+
+volumes:
+  data:
+services:
+  app:
+    build: .
+    command: npm start
+    ports: 
+      - "3000:3000"
+    volumes:
+      - .:/usr/app
+  db:
+    image: mysql:5.6
+    ports:
+      - "3306:3306"
+    volumes: 
+      - data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=app_development

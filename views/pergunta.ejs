@@ -1,0 +1,27 @@
+<%- include ('partials/header.ejs') %>
+<body>
+    <%- include ('partials/navbar.ejs') %>
+
+
+    <div class="container">
+        <hr>
+        <h1><%= pergunta.titulo %></h1>
+        <p><%= pergunta.descricao %></p>
+        <hr>
+        <h2>Respostas</h2>
+        <% respostas.forEach(resposta => { %>
+            <p><%= resposta.descricao %> <span style="font-size: 10px; color: grey;" class="float-right"><%= ((resposta.createdAt.getDate() )) + "/" + ((resposta.createdAt.getMonth() + 1)) + "/" + resposta.createdAt.getFullYear() %></span></p>
+            
+            <hr>
+        <% }) %>
+        <form action="/salvarresposta" method="POST">
+            <div class="form-group">
+                <label for="">Responder</label>
+                <textarea name="descricao" class="form-control"></textarea>
+            </div>
+            <input type="hidden" name="perguntaId" value="<%= pergunta.id %>">
+            <button class="btn btn-primary mt-2 float-right">Responder</button>
+        </form>
+    </div>
+</body>
+<%- include ('partials/footer.ejs') %>
